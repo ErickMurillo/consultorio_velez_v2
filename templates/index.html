@@ -1,3 +1,6 @@
+{% load thumbnail %}
+{% load solo_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,7 +44,7 @@
                 </li>
               </ul>
             </div>
-            <div class="navbar-cell">
+            <!--<div class="navbar-cell">
               <div class="navbar-subpanel">
                 <div class="navbar-subpanel-item">
                   <div class="navbar-info">
@@ -50,30 +53,34 @@
                   <button class="navbar-button navbar-info-button mdi-dots-vertical novi-icon" data-multi-switch='{"targets":".rd-navbar","scope":".rd-navbar","class":"navbar-info-active","isolate":"[data-multi-switch]"}'></button>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
         </nav>
       </header>
       <!-- Person-->
       <section class="section-md bg-100">
+        {% get_solo 'configuracion.Inicio' as inicio %}
         <div class="container">
           <div class="row row-30 justify-content-center justify-content-md-between flex-md-row-reverse">
-            <div class="col-auto col-xs-8 col-md-6 col-lg-5 col-xl-6"><img src="/static/images/index-01-490x360.jpg" alt="" width="490" height="360"/>
+            <div class="col-auto col-xs-8 col-md-6 col-lg-5 col-xl-6">
+              {% thumbnail inicio.foto "490x360" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}
             </div>
             <div class="col-auto col-xs-8 col-md-6 col-xxl-5">
-              <h1>Dr. Courtney Williams</h1>
-              <h3 class="text-primary">Reliable and Affordable Family Doctor</h3>
+              <h1>{{inicio.nombre}}</h1>
+              <h3 class="text-primary">{{inicio.descripcion}}</h3>
                     <!-- Blurb-->
                     <article class="blurb blurb-side">
                       <div class="blurb-item">
                         <div class="icon blurb-icon mdi-phone"></div>
                       </div>
                       <div class="blurb-body">
-                        <div class="blurb-title h2"><a href="tel:#">+1 (800) 925-63-24</a></div>
-                        <div class="blurb-text">Call Now and Get a FREE Consultation</div>
+                        <div class="blurb-title h2"><a href="tel:{{inicio.telefono}}">{{inicio.telefono}}</a></div>
+                        <!--<div class="blurb-text">Call Now and Get a FREE Consultation</div>-->
                       </div>
                     </article>
-              <h5>2965  Pine Garden Ln. <br>Nelson, GA 30107</h5>
+              <h5>{{inicio.direccion}}</h5>
             </div>
           </div>
         </div>
@@ -81,7 +88,7 @@
       <!-- Blurb-->
       <section class="section-md bg-100 text-center text-md-left">
         <div class="container">
-          <h2>How can I Help You?</h2>
+          <h2>¿Cómo puedo ayudarte?</h2>
           <div class="row row-30">
             <div class="col-sm-6 col-md-4">
                     <!-- Blurb-->
@@ -103,8 +110,8 @@
                           <path d="M20 36.3333C20 35.781 20.4477 35.3333 21 35.3333H43C43.5523 35.3333 44 35.781 44 36.3333C44 36.8856 43.5523 37.3333 43 37.3333H21C20.4477 37.3333 20 36.8856 20 36.3333Z" fill="#112950"></path>
                         </svg>
                       </div>
-                      <div class="blurb-title h3">Outpatient Medicine</div>
-                      <div class="blurb-text">Our medical clinic provides quality care for the entire family while maintaining a personable atmosphere.</div>
+                      <div class="blurb-title h3">{{inicio.titulo_1}}</div>
+                      <div class="blurb-text">{{inicio.texto_1}}</div>
                     </article>
             </div>
             <div class="col-sm-6 col-md-4">
@@ -127,8 +134,8 @@
                           <path d="M30.6667 57.3333C30.6667 56.597 31.2636 56 32 56C32.7364 56 33.3334 56.597 33.3334 57.3333C33.3334 58.0697 32.7364 58.6667 32 58.6667C31.2636 58.6667 30.6667 58.0697 30.6667 57.3333Z" fill="#112950"></path>
                         </svg>
                       </div>
-                      <div class="blurb-title h3">Pediatric Services</div>
-                      <div class="blurb-text">Make sure your child is hitting all their benchmarks while growing up, and getting properly immunized.</div>
+                      <div class="blurb-title h3">{{inicio.titulo_2}}</div>
+                      <div class="blurb-text">{{inicio.texto_2}}</div>
                     </article>
             </div>
             <div class="col-sm-6 col-md-4">
@@ -145,8 +152,8 @@
                           <path fill-rule="evenodd" clip-rule="evenodd" d="M28.8571 31.8571V31.5714C28.8571 31.2607 28.8757 30.3486 29.6245 29.6521C30.3257 28.9999 31.1896 29 31.4498 29H32.5502C32.8104 29 33.6743 28.9999 34.3755 29.6521C35.1243 30.3486 35.1429 31.2607 35.1429 31.5714V31.8571H35.4286C35.7393 31.8571 36.6514 31.8757 37.3479 32.6245C38.0001 33.3257 38 34.1896 38 34.4498V35.5502C38 35.8104 38.0001 36.6743 37.3479 37.3755C36.6514 38.1243 35.7393 38.1429 35.4286 38.1429H35.1429V38.4286C35.1429 38.7393 35.1243 39.6514 34.3755 40.3479C33.6743 41.0001 32.8104 41 32.5502 41H31.4498C31.1896 41 30.3257 41.0001 29.6245 40.3479C28.8757 39.6514 28.8571 38.7393 28.8571 38.4286V38.1429H28.5714C28.2607 38.1429 27.3486 38.1243 26.6521 37.3755C25.9999 36.6743 26 35.8104 26 35.5502V34.4498C26 34.1896 25.9999 33.3257 26.6521 32.6245C27.3486 31.8757 28.2607 31.8571 28.5714 31.8571H28.8571ZM30.8571 33.8571H28.5714C28.1203 33.8571 28 34.0034 28 34.4545V35.5455C28 35.9966 28.1203 36.1429 28.5714 36.1429H30.8571V38.4286C30.8571 38.8797 31.0034 39 31.4545 39H32.5455C32.9966 39 33.1429 38.8797 33.1429 38.4286V36.1429H35.4286C35.8797 36.1429 36 35.9966 36 35.5455V34.4545C36 34.0034 35.8797 33.8571 35.4286 33.8571H33.1429V31.5714C33.1429 31.1203 32.9966 31 32.5455 31H31.4545C31.0034 31 30.8571 31.1203 30.8571 31.5714V33.8571Z" fill="#112950"></path>
                         </svg>
                       </div>
-                      <div class="blurb-title h3">Urgent Care Services</div>
-                      <div class="blurb-text">Quick, convenient care for non-emergency illnesses and injuries.</div>
+                      <div class="blurb-title h3">{{inicio.titulo_3}}</div>
+                      <div class="blurb-text">{{inicio.texto_3}}</div>
                     </article>
             </div>
           </div>
@@ -164,10 +171,10 @@
               <h2>About Dr. Courtney Williams, Family Doctor</h2>
               <h3 class="text-primary">Dr. Courtney Williams, F.D., is one of the top family medicine practitioners in the United States.</h3>
               <p>As one of the most experienced family doctors in the area, Dr. Courtney Williams, F.D., has experience in emergency medicine and physical therapy. Her professional background allows her to deliver the utmost level of health care for her patients. You can expect high-quality approach from Dr. Williams.</p>
-              <ul class="list list-marked-2 font-weight-medium text-dark">
+              <!--<ul class="list list-marked-2 font-weight-medium text-dark">
                 <li class="list-item">Emergency & express care services</li>
                 <li class="list-item">Home care & medication therapy management</li>
-              </ul>
+              </ul>-->
             </div>
           </div>
         </div>
@@ -175,7 +182,7 @@
       <!-- Accordions-->
       <section class="section-md bg-100" id="services">
         <div class="container">
-          <h2>I Offer a Whole Range of <br class="d-none d-md-inline">Medical Services</h2>
+          <h2>Ofrezco una Amplia Gama de <br class="d-none d-md-inline">Servicios Medicos</h2>
           <div class="accordion">
             <div class="accordion-item active">
               <div class="accordion-head h3">Doctor's Consultation</div>
@@ -188,7 +195,7 @@
                     <p>At MedoX, you can expect nothing less than the ultimate level of care when it comes to treatments and consultations.</p>
                   </div>
                 </div>
-                <div class="row row-10 row-content">
+                <!--<div class="row row-10 row-content">
                   <div class="col-sm-6">
                     <ul class="list list-marked">
                       <li class="list-item">Individual prescriptions</li>
@@ -204,13 +211,13 @@
                       <li class="list-item">Urgent medical consulting</li>
                     </ul>
                   </div>
-                </div>
+                </div>-->
                       <!-- Book-->
-                      <div class="book">
+                      <!--<div class="book">
                         <div class="book-title">Book Your Online Appointment</div>
                         <div class="book-value">1hr / $25.00</div>
                         <button class="btn btn-primary book-btn" data-custom-scroll-to="contacts"><span class="btn-icon mdi-book-open"></span><span>Make an Appointment</span></button>
-                      </div>
+                      </div>-->
               </div>
             </div>
             <div class="accordion-item">
@@ -355,7 +362,7 @@
         </div>
       </section>
       <!-- Blockquotes-->
-      <section class="section-md bg-transparent text-center" id="reviews">
+      {% comment %}<section class="section-md bg-transparent text-center" id="reviews">
         <div class="container">
           <h2>What People Say</h2>
           <p>Take a look at the recent testimonials submitted by our patients</p>
@@ -426,9 +433,9 @@
             </div>
           </div>
         </div>
-      </section>
+      </section>{% endcomment %}
       <!-- Contacts-->
-      <section class="section-md bg-100" id="contacts">
+      <section class="section-md bg-transparent " id="contacts">
         <div class="container">
           <div class="row row-30 justify-content-center">
             <div class="col-sm-10 col-md-6">

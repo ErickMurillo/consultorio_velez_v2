@@ -19,6 +19,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from resumenes_clinicos.views import *
 
+admin.site.site_header = "Administración DrVelezPonce"
+admin.site.site_title = "Administración DrVelezPonce"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name = 'index')

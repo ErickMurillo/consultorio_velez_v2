@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'resumenes_clinicos',
+    'configuracion',
+    'solo',
+    'sorl.thumbnail',   
 ]
 
 MIDDLEWARE = [
