@@ -48,8 +48,8 @@ class Servicios(models.Model):
 class Contacto(SingletonModel):
     texto = models.CharField(max_length = 250)
     descripcion = models.TextField()
-    horario_1 = models.CharField(max_length = 250)
-    horario_2 = models.CharField(max_length = 250, null = True, blank = True)
+    horario_1 = models.CharField(max_length = 250,help_text="Ej. Lunes – Viernes: 07:00am – 10:00pm")
+    horario_2 = models.CharField(max_length = 250, null = True, blank = True,help_text="Ej. Lunes – Viernes: 07:00am – 10:00pm")
     correo = models.EmailField() 
 
     def __str__(self):

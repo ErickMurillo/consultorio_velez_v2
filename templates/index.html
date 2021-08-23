@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home</title>
+    {% get_solo 'configuracion.Inicio' as inicio %}
+    <title>{{inicio.nombre}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta property="og:title" content="Template Monster Admin Template">
-    <meta property="og:description" content="brevis, barbatus clabulares aliquando convertam de dexter, peritus capio. devatio clemens habitio est.">
+    <meta property="og:title" content="{{inicio.nombre}}">
+    <meta property="og:description" content="{{inicio.descripcion}}">
     <meta property="og:image" content="http://digipunk.netii.net/static/images/radar.gif">
     <meta property="og:url" content="http://digipunk.netii.net">
     <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
@@ -59,7 +60,7 @@
       </header>
       <!-- Person-->
       <section class="section-md bg-100">
-        {% get_solo 'configuracion.Inicio' as inicio %}
+        
         <div class="container">
           <div class="row row-30 justify-content-center justify-content-md-between flex-md-row-reverse">
             <div class="col-auto col-xs-8 col-md-6 col-lg-5 col-xl-6">
@@ -162,15 +163,19 @@
       <!-- About us 1-->
       <section class="section-md bg-transparent" id="about">
         <div class="container">
+          {% get_solo 'configuracion.Informacion' as info %}
           <div class="row row-30 justify-content-center">
             <div class="col-sm-5 col-lg-4 col-xxl-6">
-              <div class="image-responsive"><img class="image" src="/static/images/image-02-400x520.jpg" alt="" width="400" height="520"/>
+              <div class="image-responsive">
+                {% thumbnail info.foto "400x520" crop="center" as im %}
+                  <img class="image" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}
               </div>
             </div>
             <div class="col-sm-7 col-lg-6 col-xl-5 col-xxl-6">
-              <h2>About Dr. Courtney Williams, Family Doctor</h2>
-              <h3 class="text-primary">Dr. Courtney Williams, F.D., is one of the top family medicine practitioners in the United States.</h3>
-              <p>As one of the most experienced family doctors in the area, Dr. Courtney Williams, F.D., has experience in emergency medicine and physical therapy. Her professional background allows her to deliver the utmost level of health care for her patients. You can expect high-quality approach from Dr. Williams.</p>
+              <h2>Acerca del {{info.texto_1}}</h2>
+              <h3 class="text-primary">{{info.texto_2}}</h3>
+              <p>{{info.descripcion}}</p>
               <!--<ul class="list list-marked-2 font-weight-medium text-dark">
                 <li class="list-item">Emergency & express care services</li>
                 <li class="list-item">Home care & medication therapy management</li>
@@ -184,180 +189,20 @@
         <div class="container">
           <h2>Ofrezco una Amplia Gama de <br class="d-none d-md-inline">Servicios Medicos</h2>
           <div class="accordion">
-            <div class="accordion-item active">
-              <div class="accordion-head h3">Doctor's Consultation</div>
+            
+            {% for serv in servicios %}  
+            <div class="accordion-item {% if forloop.first %}active{% endif %}
+               ">
+              <div class="accordion-head h3">{{serv.titulo}}</div>
               <div class="accordion-body">
                 <div class="row row-10 row-content">
-                  <div class="col-md-6">
-                    <p>Need a consultation regarding your treatment or diagnosis? I’m always ready to provide you with professional healthcare consulting that is offered at an affordable price.</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p>At MedoX, you can expect nothing less than the ultimate level of care when it comes to treatments and consultations.</p>
-                  </div>
-                </div>
-                <!--<div class="row row-10 row-content">
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Individual prescriptions</li>
-                      <li class="list-item">Personalized medical consultations</li>
-                      <li class="list-item">Choosing appropriate treatment options</li>
-                      <li class="list-item">Detailed medical opinion</li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Online medical consulting</li>
-                      <li class="list-item">Diagnostic services</li>
-                      <li class="list-item">Urgent medical consulting</li>
-                    </ul>
-                  </div>
-                </div>-->
-                      <!-- Book-->
-                      <!--<div class="book">
-                        <div class="book-title">Book Your Online Appointment</div>
-                        <div class="book-value">1hr / $25.00</div>
-                        <button class="btn btn-primary book-btn" data-custom-scroll-to="contacts"><span class="btn-icon mdi-book-open"></span><span>Make an Appointment</span></button>
-                      </div>-->
-              </div>
-            </div>
-            <div class="accordion-item">
-              <div class="accordion-head h3">Diagnostic Services</div>
-              <div class="accordion-body">
-                <div class="row row-10 row-content">
-                  <div class="col-md-6">
-                    <p>When specialized diagnostic services are needed, the full facilities of the Medox Clinic are available to the patients. The in-house laboratory offers our patients a unique level of care.</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p>When you are ill or when swift diagnosis can provide peace of mind, it is important to have rapid access to information about your condition.</p>
-                  </div>
-                </div>
-                <div class="row row-10 row-content">
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Laboratory medicine</li>
-                      <li class="list-item">Radiology</li>
-                      <li class="list-item">Pathology</li>
-                      <li class="list-item">Teleradiology</li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">MRI</li>
-                      <li class="list-item">Mammography</li>
-                      <li class="list-item">Computed tomography</li>
-                    </ul>
-                  </div>
-                </div>
-                      <!-- Book-->
-                      <div class="book">
-                        <div class="book-title">Book Your Online Appointment</div>
-                        <div class="book-value">1hr / $20.00</div>
-                        <button class="btn btn-primary book-btn" data-custom-scroll-to="contacts"><span class="btn-icon mdi-book-open"></span><span>Make an Appointment</span></button>
-                      </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <div class="accordion-head h3">Urgent Care</div>
-              <div class="accordion-body">
-                <div class="row row-10 row-content">
-                  <div class="col-md-6">
-                    <p>Do you or a family member have a medical issue that needs to be taken care of right away? Medox has you covered. Our urgent care does not require appointments or referrals.</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p>When you need our help, all you need to do is walk in and tell us what’s wrong. Dr. Courtney Williams will be ready to help you with any illness or healthcare issue.</p>
-                  </div>
-                </div>
-                <div class="row row-10 row-content">
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Unconsciousness</li>
-                      <li class="list-item">Severe abdominal pain</li>
-                      <li class="list-item">Severe allergic reactions</li>
-                      <li class="list-item">Severe burns</li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Severe choking including drowning</li>
-                      <li class="list-item">Severe/open fractures</li>
-                      <li class="list-item">Signs of stroke or heart attack</li>
-                    </ul>
-                  </div>
-                </div>
-                      <!-- Book-->
-                      <div class="book">
-                        <div class="book-title">Book Your Online Appointment</div>
-                        <div class="book-value">1hr / $35.00</div>
-                        <button class="btn btn-primary book-btn" data-custom-scroll-to="contacts"><span class="btn-icon mdi-book-open"></span><span>Make an Appointment</span></button>
-                      </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <div class="accordion-head h3">Primary Care</div>
-              <div class="accordion-body">
-                <div class="row row-10 row-content">
-                  <div class="col-md-6">
-                    <p>Dr. Courtney Williams is capable of providing non-emergency medical care for patients of all ages. Whatever the issue, you can trust Dr. Williams to provide all of the required treatments.</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p>At MedoX, you can expect nothing less than the ultimate level of care when it comes to treatments and consultations.</p>
-                  </div>
-                </div>
-                <div class="row row-10 row-content">
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Physical exams</li>
-                      <li class="list-item">Routine checkups</li>
-                      <li class="list-item">X-rays</li>
-                      <li class="list-item">Primary care services</li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Urgent care services</li>
-                      <li class="list-item">Flu shots</li>
-                      <li class="list-item">Vaccinations</li>
-                    </ul>
-                  </div>
-                </div>
-                      <!-- Book-->
-                      <div class="book">
-                        <div class="book-title">Book Your Online Appointment</div>
-                        <div class="book-value">1hr / $40.00</div>
-                        <button class="btn btn-primary book-btn" data-custom-scroll-to="contacts"><span class="btn-icon mdi-book-open"></span><span>Make an Appointment</span></button>
-                      </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <div class="accordion-head h3">Annual Wellness Physical</div>
-              <div class="accordion-body">
-                <div class="row row-10 row-content">
-                  <div class="col-md-6">
-                    <p>The wellness physical follows a specific set up steps approved by Medicare. As a “wellness” exam, the primary purpose of this physical is to prevent future medical issues.</p>
-                  </div>
-                  <div class="col-md-6">
-                    <p>In a wellness physical, doctors follow a plan of care, the entirety of which is covered under Medicare Part B benefits.</p>
-                  </div>
-                </div>
-                <div class="row row-10 row-content">
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">A health risk assessment</li>
-                      <li class="list-item">A review of your family medical history</li>
-                      <li class="list-item">Reviewing your current medications</li>
-                      <li class="list-item">Routine measurements for height, weight, etc.</li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-6">
-                    <ul class="list list-marked">
-                      <li class="list-item">Assessing signs of memory loss or dementia</li>
-                      <li class="list-item">A personalized consultation with your physician</li>
-                      <li class="list-item">Health screenings and preventive care services</li>
-                    </ul>
+                  <div class="col-md-12">
+                   <p>{{serv.descripcion}}</p> 
                   </div>
                 </div>
               </div>
             </div>
+            {% endfor %}
           </div>
         </div>
       </section>
@@ -437,57 +282,58 @@
       <!-- Contacts-->
       <section class="section-md bg-transparent " id="contacts">
         <div class="container">
+          {% get_solo 'configuracion.Contacto' as contacto %}
           <div class="row row-30 justify-content-center">
             <div class="col-sm-10 col-md-6">
-              <h2>Sign Up for an Appointment with the Doctor Today!</h2>
-              <p>Take some time to fill out the form and get an appointment with an experienced family doctor.</p>
+              <h2>{{contacto.texto}}</h2>
+              <p>{{contacto.descripcion}}</p>
               <div class="divider"></div>
-              <h6>2965  Pine Garden Ln. Nelson, GA 30107</h6>
+              <h6>{{inicio.direccion}}</h6>
                     <!-- Blurb-->
                     <article class="blurb blurb-side">
                       <div class="blurb-item">
                         <div class="icon blurb-icon mdi-phone"></div>
                       </div>
                       <div class="blurb-body">
-                        <div class="blurb-title h2"><a href="tel:#">+1 (800) 925-63-24</a></div>
-                        <div class="blurb-text">Call Now and Get a FREE Consultation</div>
+                        <div class="blurb-title h2"><a href="tel:{{inicio.telefono}}">{{inicio.telefono}}</a></div>
+                        <!-- <div class="blurb-text">Call Now and Get a FREE Consultation</div> -->
                       </div>
                     </article>
               <ul class="list">
-                <li class="list-item">Monday – Friday: 07:00am – 10:00pm</li>
-                <li class="list-item">​​Saturday – Sunday: 08:00am – 08:00pm</li>
-              </ul><a class="link link-underline link-underline-1" href="mailto:#">info@demolink.org</a>
-              <div class="social"><a class="icon icon-md icon-link icon-dark mdi-facebook" href="#"></a><a class="icon icon-md icon-link icon-dark mdi-instagram" href="#"></a><a class="icon icon-md icon-link icon-dark mdi-youtube-play" href="#"></a><a class="icon icon-md icon-link icon-dark mdi-twitter" href="#"></a></div>
+                <li class="list-item">{{contacto.horario_1}}</li>
+                <li class="list-item">​​{{contacto.horario_2}}</li>
+              </ul><a class="link link-underline link-underline-1" href="mailto:{{contacto.correo}}">{{contacto.correo}}</a>
+              <!-- <div class="social"><a class="icon icon-md icon-link icon-dark mdi-facebook" href="#"></a><a class="icon icon-md icon-link icon-dark mdi-instagram" href="#"></a><a class="icon icon-md icon-link icon-dark mdi-youtube-play" href="#"></a><a class="icon icon-md icon-link icon-dark mdi-twitter" href="#"></a></div> -->
             </div>
             <div class="col-sm-10 col-md-6">
               <div class="form-box">
-                <h2>Make an Appointment</h2>
+                <h2>Enviame tu consulta</h2>
                 <form class="rd-form rd-mailform" data-form-output="contact-form" data-form-type="contact" method="post" action="components/rd-mailform/rd-mailform.php">
                   <div class="form-wrap">
-                    <label class="form-label" for="input-name">Your name*</label>
+                    <label class="form-label" for="input-name">Tu nombre*</label>
                     <div class="form-group">
-                      <input class="form-control" id="input-name" type="text" name="name" placeholder="Please enter your name" data-constraints="@Required">
+                      <input class="form-control" id="input-name" type="text" name="name" placeholder="Favor ingresar tu nombre" data-constraints="@Required">
                     </div>
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label" for="input-phone">Your phone*</label>
+                    <label class="form-label" for="input-phone">Tu teléfono*</label>
                     <div class="form-group">
-                      <input class="form-control" id="input-phone" type="text" name="phone" placeholder="Please enter your phone number" data-constraints="@Numeric @Required">
+                      <input class="form-control" id="input-phone" type="text" name="phone" placeholder="Favor ingresar tu número de teléfono" data-constraints="@Numeric @Required">
                     </div>
                   </div>
                   <div class="form-wrap">
-                    <label class="form-label" for="input-message">Your message*</label>
+                    <label class="form-label" for="input-message">Tu mensaje*</label>
                     <div class="form-group">
-                      <textarea class="form-control" id="input-message" name="textarea" placeholder="Please enter your message" data-constraints="@Required"></textarea>
+                      <textarea class="form-control" id="input-message" name="textarea" placeholder="Favor ingresar tu mensaje" data-constraints="@Required"></textarea>
                     </div>
                   </div>
                         <div class="custom-control custom-checkbox">
                           <input class="custom-control-input" type="checkbox" id="29xbdaiq7jx">
-                          <label class="custom-control-label" for="29xbdaiq7jx"><span>I agree to the </span><a class="link link-dark link-underline" href="#">Terms & Privacy Policy</a><span>. I also agree that I’m over 18 years of age.</span>
+                          <!-- <label class="custom-control-label" for="29xbdaiq7jx"><span>I agree to the </span><a class="link link-dark link-underline" href="#">Terms & Privacy Policy</a><span>. I also agree that I’m over 18 years of age.</span> -->
                           </label>
                         </div>
                   <div class="rd-form-btn text-left">
-                    <button class="btn btn-lg btn-block" type="submit">Submit</button>
+                    <button class="btn btn-lg btn-block" type="submit">Enviar</button>
                   </div>
                 </form>
                 <div class="form-output snackbar snackbar-primary" id="contact-form"></div>
