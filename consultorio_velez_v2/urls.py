@@ -24,5 +24,6 @@ admin.site.site_title = "Administración DrVelezPonce"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name = 'index')
+    path('', index, name = 'index'),
+    path('detalle-consultas/<id>/', detalle_consultas, name = 'detalle-consultas'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
