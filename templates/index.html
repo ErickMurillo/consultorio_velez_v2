@@ -308,23 +308,26 @@
             <div class="col-sm-10 col-md-6">
               <div class="form-box">
                 <h2>Enviame tu consulta</h2>
-                <form class="rd-form rd-mailform" data-form-output="contact-form" data-form-type="contact" method="post" action="components/rd-mailform/rd-mailform.php">
+                <form class="rd-form rd-mailform" data-form-output="contact-form" data-form-type="contact" method="post" action=".">{% csrf_token %}
                   <div class="form-wrap">
                     <label class="form-label" for="input-name">Tu nombre*</label>
                     <div class="form-group">
-                      <input class="form-control" id="input-name" type="text" name="name" placeholder="Favor ingresar tu nombre" data-constraints="@Required">
+                      <!-- <input class="form-control" id="input-name" type="text" name="name" placeholder="Favor ingresar tu nombre" data-constraints="@Required"> -->
+                      {{form.nombre}}
                     </div>
                   </div>
                   <div class="form-wrap">
                     <label class="form-label" for="input-phone">Tu teléfono*</label>
                     <div class="form-group">
-                      <input class="form-control" id="input-phone" type="text" name="phone" placeholder="Favor ingresar tu número de teléfono" data-constraints="@Numeric @Required">
+                      <!-- <input class="form-control" id="input-phone" type="text" name="phone" placeholder="Favor ingresar tu número de teléfono" data-constraints="@Numeric @Required"> -->
+                      {{form.telefono}}
                     </div>
                   </div>
                   <div class="form-wrap">
                     <label class="form-label" for="input-message">Tu mensaje*</label>
                     <div class="form-group">
-                      <textarea class="form-control" id="input-message" name="textarea" placeholder="Favor ingresar tu mensaje" data-constraints="@Required"></textarea>
+                      {{form.mensaje}}
+                      <!-- <textarea class="form-control" id="input-message" name="textarea" placeholder="Favor ingresar tu mensaje" data-constraints="@Required"></textarea> -->
                     </div>
                   </div>
                         <div class="custom-control custom-checkbox">
@@ -366,5 +369,14 @@
         <div class="preloader-item"></div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $("#id_nombre").addClass("form-control");
+      $("#id_telefono").addClass("form-control");
+      $("#id_mensaje").addClass("form-control");
+      $("#id_nombre").attr("placeholder", "Favor ingresar tu nombre");
+      $("#id_telefono").attr("placeholder", "Favor ingresar tu número de teléfono");
+      $("#id_mensaje").attr("placeholder", "Favor ingresar tu mensaje");
+    </script>
   </body>
 </html>
