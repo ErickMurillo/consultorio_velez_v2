@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'configuracion',
     'solo',
     'sorl.thumbnail',   
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -114,3 +115,11 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 1000,
+    },
+}

@@ -1,6 +1,7 @@
 from django.db import models
 from solo.models import SingletonModel
 from sorl.thumbnail import ImageField
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Inicio(SingletonModel):
@@ -36,7 +37,7 @@ class Informacion(SingletonModel):
 
 class Servicios(models.Model):
     titulo = models.CharField(max_length = 250)
-    descripcion = models.TextField()
+    descripcion = RichTextField()
 
     def __str__(self):
         return self.titulo
@@ -44,10 +45,11 @@ class Servicios(models.Model):
     class Meta:
         verbose_name = "3. Servicios"
         verbose_name_plural = "3. Servicios"
+        ordering = ('id',)
 
 class Contacto(SingletonModel):
     texto = models.CharField(max_length = 250)
-    descripcion = models.TextField()
+    # descripcion = models.TextField()
     horario_1 = models.CharField(max_length = 250,help_text="Ej. Lunes – Viernes: 07:00am – 10:00pm")
     horario_2 = models.CharField(max_length = 250, null = True, blank = True,help_text="Ej. Lunes – Viernes: 07:00am – 10:00pm")
     correo = models.EmailField() 
