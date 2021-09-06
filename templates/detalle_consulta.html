@@ -1,6 +1,54 @@
 {% extends "admin/base_site.html" %}
 
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.css">
+{% endblock extrastyle %}
+
+{% block footer %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+          $('table').DataTable({
+          responsive: true,
+          "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                }
+        });
+    } );
+    </script>
+{% endblock footer %}
+    
+
 {% block content %}
-{{consultas}}
+Paciente: {{paciente}}
+
+<table>
+    <thead>
+    <tr>
+      <th>Fecha consulta</th>
+      <th>Motivo consulta</th>
+      <th>Historial de enfermedades actuales</th>
+      <th>Examen físico</th>
+      <th>Diagnóstico</th>
+      <th>Tratamiento</th>
+      <th>Fecha prox consulta</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    {% for obj in consultas %}
+    <tr>
+        <td>{{obj.fecha_consulta}}</td>
+        <td>{{obj.motivo_consulta}}</td>
+        <td>{{obj.hea}}</td>
+        <td>{{obj.exfx}}</td>
+        <td>{{obj.dx}}</td>
+        <td>{{obj.tx}}</td>
+        <td>{{obj.fecha_prox_consulta}}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+  </table>
 {% endblock content %}
     

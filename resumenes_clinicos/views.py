@@ -38,5 +38,6 @@ def index(request, template = 'index.html'):
 	return render(request, template, locals())
 
 def detalle_consultas(request,template='detalle_consulta.html',id=None):
+	paciente = Paciente.objects.get(id = id)
 	consultas = Consulta.objects.filter(paciente = id)
 	return render(request, template, locals())
