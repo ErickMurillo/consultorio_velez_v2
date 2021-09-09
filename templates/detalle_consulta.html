@@ -40,11 +40,11 @@ Paciente: {{paciente}}
     {% for obj in consultas %}
     <tr>
         <td>{{obj.fecha_consulta}}</td>
-        <td>{{obj.motivo_consulta}}</td>
-        <td>{{obj.hea}}</td>
-        <td>{{obj.exfx}}</td>
-        <td>{{obj.dx}}</td>
-        <td>{{obj.tx}}</td>
+        <td>{{obj.motivo_consulta|linebreaks}}</td>
+        <td>{{obj.hea|linebreaks}}</td>
+        <td>{{obj.exfx|linebreaks}}</td>
+        <td>{{obj.dx|linebreaks}}</td>
+        <td>{{obj.tx|linebreaks}}</td>
         <td>{{obj.fecha_prox_consulta}}</td>
     </tr>
     {% endfor %}
